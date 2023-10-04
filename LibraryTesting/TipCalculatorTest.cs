@@ -83,5 +83,36 @@ public class TipCalculatorTest
          Assert.ThrowsException<ArgumentOutOfRangeException>(() => {TipCalculator.CalculateTip(mealCosts,1.5f); });
     }
 
+     [TestMethod]
+    public void Test_CalculateTipPerPerson_NormalCase_ReturnsCorrectTip()
+    {
+    
+        decimal totalAmount = 100m;
+        int numberOfPatrons = 4;
+        decimal tipPercentage = 0.10m;  
+        decimal result = TipCalculator.CalculateTipPerPerson(totalAmount, numberOfPatrons, tipPercentage);
+        Assert.AreEqual(2.5m, result);  
+    }
+
+
+    [TestMethod]
+    public void Test_CalculateTipPerPerson_ZeroAmount_ReturnsZeroTip()
+    {
+        decimal totalAmount = 0m;
+        int numberOfPatrons = 4;
+        decimal tipPercentage = 0.10m;
+        decimal result = TipCalculator.CalculateTipPerPerson(totalAmount, numberOfPatrons, tipPercentage);
+        Assert.AreEqual(0m, result);
+    }
+
+    [TestMethod]
+    public void Test_CalculateTipPerPerson_ZeroPatrons()
+    {
+
+        decimal totalAmount = 100m;
+        int numberOfPatrons = 0;
+        decimal tipPercentage = 0.10m;
+        Assert.ThrowsException<DivideByZeroException>(() => {TipCalculator.CalculateTipPerPerson(totalAmount, numberOfPatrons, tipPercentage); });
+    }
     
 }
