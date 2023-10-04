@@ -40,4 +40,16 @@ public static class TipCalculator
 
         return tips;
     }
+
+    public static decimal CalculateTipPerPerson(decimal totalAmount, int numberOfPatrons, decimal tipPercentage)
+    {
+        if (numberOfPatrons <= 0)
+        {
+            throw new DivideByZeroException("Number of patrons should not be 0.");
+        }
+
+        decimal totalTip = totalAmount * tipPercentage;
+        return Math.Round(totalTip / numberOfPatrons, 2);
+    }
+
 }
