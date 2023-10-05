@@ -6,21 +6,21 @@ namespace TipLibrary.Tests;
 public class TipCalculatorTest
 {
       [TestMethod]
-    public void Test_SplitAmount_ReturnInteger()
+    public void Test_SplitAmount_NormalInputs_ReturnInteger()
     {
         decimal result = TipCalculator.SplitAmount(100m, 4);
         Assert.AreEqual(25m, result);
     }
 
     [TestMethod]
-    public void Test_SplitAmount_ReturnDecimal()
+    public void Test_SplitAmount_NormalInputs_ReturnDecimal()
     {
         decimal result = TipCalculator.SplitAmount(100m, 3);
         Assert.AreEqual(33.33m, result);
     }
 
     [TestMethod]
-    public void Test_SplitAmount_By_ZeroPeople()
+    public void Test_SplitAmount_InputZeroPeople_ThrowsException()
     {
          Assert.ThrowsException<DivideByZeroException>(() => {TipCalculator.SplitAmount(100,0); });
     }
@@ -28,7 +28,7 @@ public class TipCalculatorTest
    
 
      [TestMethod]
-    public void Test_CalculateTip_ThreePerson_ReturnCorrectTip()
+    public void Test_CalculateTip_ThreePerson_NormalInputs_ReturnCorrectTip()
     {
         var mealCosts = new Dictionary<string, decimal>
         {
@@ -50,7 +50,7 @@ public class TipCalculatorTest
     }
 
     [TestMethod]
-    public void Test_CalculateTip_ThreePerson_NoTips()
+    public void Test_CalculateTip_ThreePerson_ZeroPercentageOfTip_ReturnZeroTips()
     {
         var mealCosts = new Dictionary<string, decimal>
         {
@@ -72,7 +72,7 @@ public class TipCalculatorTest
     }
 
      [TestMethod]
-    public void Test_CalculateTip_ThreePerson_IncorrectPercentage()
+    public void Test_CalculateTip_ThreePerson_PercentageOutOfRange_ThrowsExeception()
     {
          var mealCosts = new Dictionary<string, decimal>
         {
@@ -84,7 +84,7 @@ public class TipCalculatorTest
     }
 
      [TestMethod]
-    public void Test_CalculateTipPerPerson_NormalCase_ReturnsCorrectTip()
+    public void Test_CalculateTipPerPerson_NormalInputs_ReturnsCorrectTip()
     {
     
         decimal totalAmount = 100m;
@@ -106,7 +106,7 @@ public class TipCalculatorTest
     }
 
     [TestMethod]
-    public void Test_CalculateTipPerPerson_ZeroPatrons()
+    public void Test_CalculateTipPerPerson_ZeroPatrons_ThrowsException()
     {
 
         decimal totalAmount = 100m;
